@@ -29,8 +29,6 @@ class ElevatedButtonW extends StatelessWidget {
     this.isLoading,
   }) : super(key: key);
 
-  // final appController = AppController();
-
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -42,68 +40,68 @@ class ElevatedButtonW extends StatelessWidget {
         height: height ?? 40,
         child: isFloatButton ?? false
             ? Align(
-          alignment: Alignment.centerRight,
-          child: FloatingActionButton(
-            onPressed: isLoading ?? false ? null : ontap,
-            child: const Icon(Icons.add),
-          ),
-        )
+                alignment: Alignment.centerRight,
+                child: FloatingActionButton(
+                  onPressed: isLoading ?? false ? null : ontap,
+                  child: const Icon(Icons.add),
+                ),
+              )
             : ElevatedButton(
-          style: ButtonStyle(
-              minimumSize:
-              MaterialStateProperty.all(Size.zero), // Set this
-              padding: MaterialStateProperty.all(EdgeInsets.zero),
-              backgroundColor:
-              MaterialStateProperty.all(buttonColor ?? primaryColor),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                      borderRadius:
-                      BorderRadius.circular(buttonRadius ?? 10.0),
-                      side: BorderSide(
-                          color: borderColor ??
-                              buttonColor ??
-                              primaryColor)))),
-          onPressed: isLoading ?? false ? null : ontap,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              buttonIconPath != null
-                  ? Container(
-                decoration: BoxDecoration(
-                  color: buttonColor ?? primaryColor,
-                  borderRadius: BorderRadius.circular(10),
+                style: ButtonStyle(
+                    minimumSize:
+                        MaterialStateProperty.all(Size.zero), // Set this
+                    padding: MaterialStateProperty.all(EdgeInsets.zero),
+                    backgroundColor:
+                        MaterialStateProperty.all(buttonColor ?? primaryColor),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(buttonRadius ?? 10.0),
+                            side: BorderSide(
+                                color: borderColor ??
+                                    buttonColor ??
+                                    primaryColor)))),
+                onPressed: isLoading ?? false ? null : ontap,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    buttonIconPath != null
+                        ? Container(
+                            decoration: BoxDecoration(
+                              color: buttonColor ?? primaryColor,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Image.asset(
+                                buttonIconPath!,
+                                width: h * 0.033,
+                                height: h * 0.033,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          )
+                        : SizedBox(
+                            width: w * 0.001,
+                          ),
+                    isLoading ?? false
+                        ? const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
+                          )
+                        : Text(
+                            buttonText,
+                            style: TextStyle(
+                                color: buttonTextColor ?? backgroundColor),
+                          ),
+                    SizedBox(
+                      width: w * 0.001,
+                    )
+                  ],
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Image.asset(
-                    buttonIconPath!,
-                    width: h * 0.033,
-                    height: h * 0.033,
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              )
-                  : SizedBox(
-                width: w * 0.001,
               ),
-              isLoading ?? false
-                  ? const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: CircularProgressIndicator(
-                  color: Colors.white,
-                ),
-              )
-                  : Text(
-                buttonText,
-                style: TextStyle(
-                    color: buttonTextColor ?? backgroundColor),
-              ),
-              SizedBox(
-                width: w * 0.001,
-              )
-            ],
-          ),
-        ),
       ),
     );
   }
