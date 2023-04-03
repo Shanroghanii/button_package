@@ -11,29 +11,127 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+Customizable button with options.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
 
 ```dart
-const like = 'sample';
+class ElevatedButtonW extends StatelessWidget {
+  final Color? buttonColor;
+  final Color? buttonTextColor;
+  final String buttonText;
+  final String? buttonIconPath;
+  final Color? borderColor;
+  final Function()? ontap;
+  final double? buttonRadius;
+  final bool? isFloatButton;
+  final double? height;
+  final bool? isLoading;
+  const ElevatedButtonW({
+    Key? key,
+    required this.buttonText,
+    this.ontap,
+    this.buttonColor,
+    this.buttonIconPath,
+    this.buttonTextColor,
+    this.borderColor,
+    this.buttonRadius,
+    this.isFloatButton,
+    this.height,
+    this.isLoading,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double h = MediaQuery.of(context).size.height;
+    double w = MediaQuery.of(context).size.width;
+
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: SizedBox(
+        height: height ?? 40,
+        child: isFloatButton ?? false
+            ? Align(
+                alignment: Alignment.centerRight,
+                child: FloatingActionButton(
+                  onPressed: isLoading ?? false ? null : ontap,
+                  child: const Icon(Icons.add),
+                ),
+              )
+            : ElevatedButton(
+                style: ButtonStyle(
+                    minimumSize:
+                        MaterialStateProperty.all(Size.zero), // Set this
+                    padding: MaterialStateProperty.all(EdgeInsets.zero),
+                    backgroundColor:
+                        MaterialStateProperty.all(buttonColor ?? primaryColor),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(buttonRadius ?? 10.0),
+                            side: BorderSide(
+                                color: borderColor ??
+                                    buttonColor ??
+                                    primaryColor)))),
+                onPressed: isLoading ?? false ? null : ontap,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    buttonIconPath != null
+                        ? Container(
+                            decoration: BoxDecoration(
+                              color: buttonColor ?? primaryColor,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Image.asset(
+                                buttonIconPath!,
+                                width: h * 0.033,
+                                height: h * 0.033,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          )
+                        : SizedBox(
+                            width: w * 0.001,
+                          ),
+                    isLoading ?? false
+                        ? const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
+                          )
+                        : Text(
+                            buttonText,
+                            style: TextStyle(
+                                color: buttonTextColor ?? backgroundColor),
+                          ),
+                    SizedBox(
+                      width: w * 0.001,
+                    )
+                  ],
+                ),
+              ),
+      ),
+    );
+  }
+}
+
 ```
 
 ## Additional information
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+Initial release of the package with the following features:
+
+Customizable button with options for color, text, icon, border, onTap, radius, height, and loading state.
+Option to make the button a floating action button.
+Support for null safety.

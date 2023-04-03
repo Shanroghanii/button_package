@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-const Color primaryColor = Color(0xff059FA5);
-const Color backgroundColor = Color(0xffe6edf1);
-const Color secondaryColor = Color(0xff76BAB9);
+const Color pr = Color(0xff059FA5);
+const Color br = Color(0xffe6edf1);
 
 class ElevatedButtonW extends StatelessWidget {
   final Color? buttonColor;
@@ -52,15 +51,13 @@ class ElevatedButtonW extends StatelessWidget {
                         MaterialStateProperty.all(Size.zero), // Set this
                     padding: MaterialStateProperty.all(EdgeInsets.zero),
                     backgroundColor:
-                        MaterialStateProperty.all(buttonColor ?? primaryColor),
+                        MaterialStateProperty.all(buttonColor ?? pr),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.circular(buttonRadius ?? 10.0),
                             side: BorderSide(
-                                color: borderColor ??
-                                    buttonColor ??
-                                    primaryColor)))),
+                                color: borderColor ?? buttonColor ?? pr)))),
                 onPressed: isLoading ?? false ? null : ontap,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,7 +65,7 @@ class ElevatedButtonW extends StatelessWidget {
                     buttonIconPath != null
                         ? Container(
                             decoration: BoxDecoration(
-                              color: buttonColor ?? primaryColor,
+                              color: buttonColor ?? pr,
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Padding(
@@ -93,8 +90,7 @@ class ElevatedButtonW extends StatelessWidget {
                           )
                         : Text(
                             buttonText,
-                            style: TextStyle(
-                                color: buttonTextColor ?? backgroundColor),
+                            style: TextStyle(color: buttonTextColor ?? br),
                           ),
                     SizedBox(
                       width: w * 0.001,

@@ -1,6 +1,6 @@
 name: button_widget
-description: A new Flutter project.
-version: 0.0.1
+description: Customizable button with options
+version: 0.0.2
 homepage: https://github.com/Shanroghanii/button_package
 
 environment:
